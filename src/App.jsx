@@ -2,7 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { FlowerList } from './components/Flower/FlowerList.jsx'
+import FlowerList from './components/Flower/FlowerList.jsx'
+
 
 function App() {
   const [count, setCount] = useState(0)
@@ -11,6 +12,10 @@ function App() {
     <>
      <h1>Thorns and Roses</h1>
      <p>For all of your flower needs</p>
+     <div className="App">
+        <h1>Flower Shop</h1>
+        <FlowerList />
+      </div>
     </>
   )
 }
