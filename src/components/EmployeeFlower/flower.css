@@ -1,16 +1,18 @@
+.flower-list {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .flower-card {
     margin: 10px;
     border: 1px solid #ffcdf3;
     border-radius: 5px;
     padding: 10px;
+    padding-top: 10px;
     box-shadow: 0 2px 5px rgba(185, 9, 9, 0.568);
     color: rgb(2, 121, 12);
-}
-
-.flower-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
 }
 
 .new-flower {
