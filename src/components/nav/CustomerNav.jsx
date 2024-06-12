@@ -1,6 +1,6 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
 
 export const CustomerNav = () => {
   return (
@@ -13,9 +13,18 @@ export const CustomerNav = () => {
             <Nav.Link href="/retailers">Retailers</Nav.Link>
             <Nav.Link href="/distributors">Distributors</Nav.Link>
             <Nav.Link href="/nurseries">Nurseries</Nav.Link>
+            <Nav.Link
+              href="/"
+              onClick={() => {
+                localStorage.removeItem("sprig_user");
+                navigate("/", { replace: true });
+              }}
+            >
+              Logout
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
     </>
   );
-}
+};
