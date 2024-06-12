@@ -31,12 +31,13 @@ export const Login = () => {
   };
 
   return (
-    <main>
+    <main className="auth-box">
       <section>
         <Form onSubmit={handleLogin}>
+          <Form.Group className="mb-3">
           <h1>Seneca Creek Sprigs</h1>
-          <h2>Please sign in</h2>
-          <Form.Group>
+          <h2>Please sign in</h2></Form.Group>
+          <Form.Group className="mb-3">
               <Form.Control
                 type="email"
                 value={email}
@@ -46,15 +47,15 @@ export const Login = () => {
                 autoFocus
               />
           </Form.Group>
-          <Form.Group>
-              <Button className="login-button" variant="light" type="submit">
+          <Form.Group className="mb-3">
+              <Button variant="light" type="submit">
                 Sign in
               </Button>
           </Form.Group>
         </Form>
       </section>
       <section>
-        <Link to="/register">Not a member yet?</Link>
+        <Link className="link" to="/register">Not a member yet?</Link>
       </section>
     </main>
   );
