@@ -26,3 +26,29 @@ export const getAllFlowers = async () => {
 
     return flowerData;
 };
+
+export const addFlower = (flower) => {
+    return fetch('http://localhost:8088/flower', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(flower)
+    }).then(res => res.json())
+}
+
+export const updateFlower = (id, flower) => {
+    return fetch(`http://localhost:8088/flower/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(flower)
+    }).then(res => res.json())
+}
+
+export const deleteFlower = (id) => {
+    return fetch(`http://localhost:8088/flowers/${id}`, {
+        method: "DELETE"
+    })
+}

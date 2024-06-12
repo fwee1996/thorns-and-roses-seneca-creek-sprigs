@@ -1,16 +1,14 @@
-/* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
+// src/components/Flowers/Flower.jsx
 import React from 'react';
 import { Button, Card } from 'react-bootstrap';
 import './flower.css';
 
-const Flower = ({ flower }) => {
+export const Flower = ({ flower, onModify, onDelete }) => {
     if (!flower) {
         return null; // Avoid rendering if flower is undefined
     }
 
     return (
-        <>
         <Card className="flower-card">
             <Card.Body>
                 <Card.Title>{flower.species}</Card.Title>
@@ -50,13 +48,12 @@ const Flower = ({ flower }) => {
                         </ul>
                     </div>
                 )}
-                    <Button className='modify-flower' variant="warning">Modify</Button>
-                    <Button className='delete-flower' variant="danger">Delete</Button>  
+                <Button className='modify-flower' variant="warning" onClick={() => onModify(flower)}>Modify</Button>
+                <Button className='delete-flower' variant="danger" onClick={() => onDelete(flower.id)}>Delete</Button>
             </Card.Body>
         </Card>
-        </>
-        
     );
 };
 
-export default Flower;
+
+
