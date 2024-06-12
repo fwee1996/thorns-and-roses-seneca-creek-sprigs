@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 export const EmployeeNav = () => {
   return (
     <>
-      <Navbar  className="glo-nav" fixed="top" bg="light" data-bs-theme="light">
+      <Navbar fixed="top" bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="/">Navbar</Navbar.Brand>
           <Nav className="me-auto">
