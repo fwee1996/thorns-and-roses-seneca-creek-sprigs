@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import "./Login.css"
 import { createUser, getUserByEmail } from "../../services/userService"
+import { Button } from "react-bootstrap"
 
 export const Register = (props) => {
   const [customer, setCustomer] = useState({
@@ -48,16 +49,15 @@ export const Register = (props) => {
 
   return (
     <main style={{ textAlign: "center" }}>
-      <form className="form-login" onSubmit={handleRegister}>
+      <form onSubmit={handleRegister}>
         <h1>Seneca Creek Sprigs</h1>
         <h2>Please Register</h2>
         <fieldset>
-          <div className="form-group">
+          <div>
             <input
               onChange={updateCustomer}
               type="text"
               id="fullName"
-              className="form-control"
               placeholder="Enter your name"
               required
               autoFocus
@@ -65,19 +65,18 @@ export const Register = (props) => {
           </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
+          <div>
             <input
               onChange={updateCustomer}
               type="email"
               id="email"
-              className="form-control"
               placeholder="Email address"
               required
             />
           </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
+          <div>
             <label>
               <input
                 onChange={(evt) => {
@@ -93,10 +92,10 @@ export const Register = (props) => {
           </div>
         </fieldset>
         <fieldset>
-          <div className="form-group">
-            <button className="login-btn btn-info" type="submit">
+          <div>
+            <Button variant="light" type="submit">
               Register
-            </button>
+            </Button>
           </div>
         </fieldset>
       </form>
