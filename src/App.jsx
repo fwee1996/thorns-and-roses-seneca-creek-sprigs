@@ -7,6 +7,7 @@ import { Authorized } from "./views/Authorized.jsx";
 import { EmployeeNav } from "./components/nav/EmployeeNav.jsx";
 import { RetailerList } from "./components/retailers/RetailerList.jsx";
 import { RetailerDetails } from "./components/retailers/RetailerDetails.jsx";
+import { RetailerForm } from "./components/retailers/RetailerForm.jsx";
 
 export const App = () => {
   return (
@@ -16,6 +17,7 @@ export const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/retailers" element={<RetailerList />} />
+        <Route path="/retailers/new" element={<RetailerForm />} />
         <Route path="/retailers/:retailerId" element={<RetailerDetails />} />
         <Route
           path="*"

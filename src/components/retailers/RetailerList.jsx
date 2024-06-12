@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAllRetailers } from '../../services/retailerService';
 import { getAllFlowers } from '../../services/flowerService';
 import { getAllDistributors } from '../../services/distributorService';
@@ -10,6 +11,7 @@ export const RetailerList = () => {
   const [flowers, setFlowers] = useState([]);
   const [distributors, setDistributors] = useState([]);
   const [nurseries, setNurseries] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([getAllRetailers(), getAllFlowers(), getAllDistributors(), getAllNurseries()])
@@ -21,40 +23,27 @@ export const RetailerList = () => {
       });
   }, []);
 
-  const getFlowerDetails = (flowerId) => {
-    const flower = flowers.find(f => f.id === flowerId);
-    return flower ? `${flower.color} ${flower.species}` : '';
-  };
-
   const getDistributorName = (distributorId) => {
     const distributor = distributors.find(d => d.id === distributorId);
     return distributor ? distributor.businessName : '';
   };
 
   const getNurseryNames = (distributorId) => {
-    const relevantNurseries = nurseries.filter(nursery => nursery.distributorId === distributorId);
+    const relevantNurseries = nurseries.filter(n => n.distributorId === distributorId);
     return relevantNurseries.map(n => n.businessName).join(', ');
   };
 
   return (
     <section className="retailers">
+      <button onClick={() => navigate('/retailers/new')}>Add New Retailer</button>
       {retailers.map(retailer => {
         const distributor = distributors.find(d => d.id === retailer.distributorId);
         const distributorNurseries = nurseries.filter(n => n.distributorId === distributor.id);
-        const retailerFlowers = flowers.filter(f => distributorNurseries.some(n => n.id === f.nurseryId));
 
         return (
           <div key={retailer.id} className="retailer">
             <h2>{retailer.businessName}</h2>
             <p>{retailer.address}</p>
-            <h3>Flowers Sold:</h3>
-            <ul>
-              {retailerFlowers.map(flower => (
-                <li key={flower.id}>
-                  {getFlowerDetails(flower.id)} - Price: ${(flower.price * retailer.flowerMarkup).toFixed(2)}
-                </li>
-              ))}
-            </ul>
             <h3>Distributors:</h3>
             <ul>
               <li>{getDistributorName(retailer.distributorId)}</li>
