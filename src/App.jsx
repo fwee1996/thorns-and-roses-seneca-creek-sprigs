@@ -1,17 +1,23 @@
 import { useState } from 'react'
+import { Routes, Route } from "react-router-dom"
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { ApplicationViews } from './views/ApplicationViews.jsx'
 
-function App() {
-  const [count, setCount] = useState(0)
+export const App = () => {
 
   return (
-    <>
-     <h1>Thorns and Roses</h1>
-     <p>For all of your flower needs</p>
-    </>
-  )
-}
-
-export default App
+    <Routes>
+      <Route path="/login" element={<> TO DO </>}/>
+      <Route path="/register" element={<> TO DO </>}/>
+  
+      <Route 
+        path="*" 
+        element={
+            <ApplicationViews />
+        } 
+      />
+    </Routes>
+    )
+  }
