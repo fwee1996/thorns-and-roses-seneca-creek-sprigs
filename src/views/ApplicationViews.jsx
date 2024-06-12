@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { EmployeeViews } from "./EmployeeViews.jsx"
+import { CustomerViews } from "./CustomerViews.jsx"
 
 
 
@@ -8,12 +9,14 @@ export const ApplicationViews = () => {
 
   useEffect(() => {
     const localSprigUser = localStorage.getItem("sprig_user")
-    const localSprigObject = JSON.parse(localSprigUser)
+    const sprigUserObject = JSON.parse(localSprigUser)
 
-    setCurrentUser(localSprigObject)
+    setCurrentUser(sprigUserObject)
   }, [])
 
-  return (
-    <EmployeeViews /> 
+  return currentUser.isStaff ? (
+    <EmployeeViews currentUser={currentUser} /> 
+  ) : ( 
+  <CustomerViews currentUser={currentUser}/>
   )
 }
