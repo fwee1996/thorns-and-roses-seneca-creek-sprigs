@@ -7,7 +7,7 @@ export const Welcome = () => {
                 <span>Welcome to</span>
                 <span>Seneca Creek Sprigs</span>
             </h1>
-            <div>
+            <div><hr></hr>
                 <div>All florals, for all occasions.</div>
             </div>
         </div>
