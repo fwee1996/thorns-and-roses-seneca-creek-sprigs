@@ -1,6 +1,8 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Welcome } from "../components/welcome/Welcome.jsx";
 import { EmployeeNav } from "../components/nav/EmployeeNav.jsx";
+import { FlowerList } from "../components/EmployeeFlower/FlowerList.jsx";
+
 
 export const EmployeeViews = ({ currentUser }) => {
   return (
@@ -17,7 +19,7 @@ export const EmployeeViews = ({ currentUser }) => {
         <Route index element={<Welcome />} />
         <Route
           path="/flowers"
-          element={<> TO DO </>}
+          element={<FlowerList />}
         />
         <Route path="/retailers"
         element={<> TO DO </>} />
