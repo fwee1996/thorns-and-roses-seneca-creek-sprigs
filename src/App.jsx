@@ -1,20 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { FlowerList } from "./components/EmployeeFlower/FlowerList.jsx";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { ApplicationViews } from "./views/ApplicationViews.jsx";
+import { Login } from "./components/auth/Login.jsx";
+import { Register } from "./components/auth/Register.jsx";
+import { Authorized } from "./views/Authorized.jsx";
 
-
-
-function App() {
-  const [count, setCount] = useState(0)
-
+export const App = () => {
   return (
-    <>
-     <h1>Thorns and Roses</h1>
-     <p>For all of your flower needs</p>
-    </>
-  )
-}
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-export default App
+      <Route
+        path="*"
+        element={
+          <Authorized>
+            <ApplicationViews />
+          </Authorized>
+        }
+      />
+    </Routes>
+  );
+};
