@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-// src/components/Flowers/Flower.jsx
-import React from 'react'
-import { Button, Card } from 'react-bootstrap'
-import './flower.css'
+import React from 'react';
+import { Button, Card } from 'react-bootstrap';
+import './flower.css';
+import { Link } from 'react-router-dom';
 
-export const Flower = ({ flower, onModify, onDelete }) => {
-
+export const CustomerFlower = ({ flower, onBuy }) => {
+    if (!flower) {
+        return null
+    }
 
     return (
         <Card className="flower-card">
@@ -48,15 +50,12 @@ export const Flower = ({ flower, onModify, onDelete }) => {
                         </ul>
                     </div>
                 )}
-                <Button className='modify-flower' variant="warning" onClick={() => onModify(flower)}>Modify</Button>
-                <Button className='delete-flower' variant="danger" onClick={() => onDelete(flower.id)}>Delete</Button>
+
+                <Link to={`/flowers/${flower.id}`}>
+                    <Button className='purchase-flower' variant="info">View Details</Button>
+                </Link>
+                <Button className='purchase-flower' variant="success" onClick={() => onBuy(flower)}>Purchase Flower</Button>
             </Card.Body>
         </Card>
     )
 }
-
-
-
-
-
-
