@@ -9,7 +9,7 @@ export const AddNursery = ({currentUser}) => {
     const handleAddNursery = async (event) => {
         event.preventDefault() // prevent default form submission
         if (!newNursery.businessName) {
-            alert('Please fill out the businessName!')
+            alert('Please fill out your Business Name!')
             return
         }
         const nursery = {
@@ -47,3 +47,6 @@ export const AddNursery = ({currentUser}) => {
         </form>
     )
 }
+
+
+
