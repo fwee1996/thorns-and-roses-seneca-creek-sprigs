@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Welcome } from "../components/welcome/Welcome.jsx";
 import { CustomerNav } from "../components/nav/CustomerNav.jsx";
