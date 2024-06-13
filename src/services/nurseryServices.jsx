@@ -31,3 +31,21 @@ export const getAllNurseries=()=>{
     })
     return response.json()
   }
+
+
+  //get Flowers associated with nursery
+  export const getFlowersForNursery = (nurseryId) => {
+    return fetch(`http://localhost:8088/flowerNurseries?nurseryId=${nurseryId}&_expand=flower`).then(res =>
+         res.json())
+  }
+
+
+  //get Distributors associated with nursery
+  export const getDistributorsForNursery = (nurseryId) => {
+      return fetch(`http://localhost:8088/distributorNurseries?nurseryId=${nurseryId}&_expand=distributor`).then(res =>
+          res.json())
+  }
+
+
+
+  

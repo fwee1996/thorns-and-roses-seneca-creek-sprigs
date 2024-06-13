@@ -21,6 +21,10 @@ export const AddNursery = ({currentUser}) => {
         navigate('/nurseries') // navigate back to nurseries after saving
     }
 
+    const handleCancel = () => {
+        navigate('/nurseries')
+      }
+
     return (
         <form>
             <div className="form-group">
@@ -30,16 +34,15 @@ export const AddNursery = ({currentUser}) => {
                     className="form-control"
                     placeholder="Enter Business Name"
                     value={newNursery.businessName}
-                    // Update the newNursery state with the value typed by the user:
+                    // update the newNursery state with the value typed by the user:
                     onChange={(event) => setNewNursery({ ...newNursery, businessName: event.target.value })}
                     // spread operator (...) creates copy of existing state object, newNursery with all its existing properties being preserved (synopsis and url), except user input of title 
                 />
             </div>
 
             <div className="button-group">
-                <button type="submit" className="btn btn-success" onClick={handleAddNursery}>
-                    Save Nursery
-                </button>
+                <button type="submit" className="btn btn-success" onClick={handleAddNursery}>Save</button>
+                <button type='button' className='btn btn-warning' onClick={handleCancel}>Cancel</button>
             </div>
         </form>
     )

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { NurseryList } from './components/nurseries/NurseryList';
 import { AddNursery } from './components/nurseries/AddNursery';
 import { EditNursery } from './components/nurseries/EditNursery';
+import { NurseryDetails } from './components/nurseries/NurseryDetails';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,6 +20,7 @@ function App() {
         <Route path="/nurseries" element={<NurseryList />} />
         <Route path="/nurseries/addNursery" element={<AddNursery />} />
         <Route path="/nurseries/editNursery/:id" element={<EditNursery />} />
+        <Route path="/nurseries/nurseryDetails/:id" element={<NurseryDetails />} />
         </Routes>
         </Router>
     </>
