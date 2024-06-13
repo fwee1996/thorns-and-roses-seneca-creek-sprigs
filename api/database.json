@@ -71,6 +71,18 @@
       "name": "Tony Reggie",
       "email": "Tony@emailme.com",
       "isStaff": true
+    },
+    {
+      "email": "jess@newforce.cohort",
+      "name": "Jess",
+      "isStaff": true,
+      "id": 13
+    },
+    {
+      "email": "jess@customerview",
+      "name": "Jess",
+      "isStaff": false,
+      "id": 14
     }
   ],
   "customers": [

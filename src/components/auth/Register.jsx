@@ -1,105 +1,90 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "./Login.css"
-import { createUser, getUserByEmail } from "../../services/userService"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import { createUser, getUserByEmail } from "../../services/userService";
+import { Button, Form } from "react-bootstrap";
 
 export const Register = (props) => {
   const [customer, setCustomer] = useState({
     email: "",
-    fullName: "",
+    name: "",
     isStaff: false,
-  })
-  let navigate = useNavigate()
+  });
+  let navigate = useNavigate();
 
   const registerNewUser = () => {
     createUser(customer).then((createdUser) => {
       if (createdUser.hasOwnProperty("id")) {
-        localStorage.setItem(
-          "sprig_user",
-          JSON.stringify({
-            id: createdUser.id,
-            staff: createdUser.isStaff,
-          })
-        )
-
-        navigate("/")
+        // Redirect to login page after successful registration
+        navigate("/login");
       }
-    })
-  }
+    });
+  };
 
   const handleRegister = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     getUserByEmail(customer.email).then((response) => {
       if (response.length > 0) {
         // Duplicate email. No good.
-        window.alert("Account with that email address already exists")
+        window.alert("Account with that email address already exists");
       } else {
         // Good email, create user.
-        registerNewUser()
+        registerNewUser();
       }
-    })
-  }
+    });
+  };
 
   const updateCustomer = (evt) => {
-    const copy = { ...customer }
-    copy[evt.target.id] = evt.target.value
-    setCustomer(copy)
-  }
+    const copy = { ...customer };
+    copy[evt.target.id] = evt.target.value;
+    setCustomer(copy);
+  };
 
   return (
-    <main style={{ textAlign: "center" }}>
-      <form className="form-login" onSubmit={handleRegister}>
-        <h1>Seneca Creek Sprigs</h1>
-        <h2>Please Register</h2>
-        <fieldset>
-          <div className="form-group">
-            <input
-              onChange={updateCustomer}
-              type="text"
-              id="fullName"
-              className="form-control"
-              placeholder="Enter your name"
-              required
-              autoFocus
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <input
-              onChange={updateCustomer}
-              type="email"
-              id="email"
-              className="form-control"
-              placeholder="Email address"
-              required
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <label>
-              <input
-                onChange={(evt) => {
-                  const copy = { ...customer }
-                  copy.isStaff = evt.target.checked
-                  setCustomer(copy)
-                }}
-                type="checkbox"
-                id="isStaff"
-              />
-              I am an employee{" "}
-            </label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <button className="login-btn btn-info" type="submit">
-              Register
-            </button>
-          </div>
-        </fieldset>
-      </form>
+    <main className="auth-box">
+      <Form onSubmit={handleRegister}>
+        <Form.Group className="mb-2">
+          <h1><span className="title-style">Seneca Creek Sprigs</span></h1>
+          <span className="body-style">Please Register</span>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Control
+            onChange={updateCustomer}
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            required
+            autoFocus
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Control
+            onChange={updateCustomer}
+            type="email"
+            id="email"
+            placeholder="Email address"
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Check
+            label="I am an employee"
+            onChange={(evt) => {
+              const copy = { ...customer };
+              copy.isStaff = evt.target.checked;
+              setCustomer(copy);
+            }}
+            type="checkbox"
+            id="isStaff"
+            className="text-center"
+          />
+        </Form.Group>
+        <Form.Group>
+          <Button variant="light" type="submit">
+            Register
+          </Button>
+        </Form.Group>
+      </Form>
     </main>
-  )
-}
+  );
+};
