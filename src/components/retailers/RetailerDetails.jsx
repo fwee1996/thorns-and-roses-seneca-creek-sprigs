@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { getRetailerById } from '../../services/retailerService';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getRetailerById, deleteRetailer } from '../../services/retailerService';
 import { getAllFlowers } from '../../services/flowerService';
 import { getAllDistributors } from '../../services/distributorService';
 import { getAllNurseries } from '../../services/nurseryService';
@@ -12,6 +12,7 @@ export const RetailerDetails = () => {
   const [distributors, setDistributors] = useState([]);
   const [nurseries, setNurseries] = useState([]);
   const { retailerId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     Promise.all([getRetailerById(retailerId), getAllFlowers(), getAllDistributors(), getAllNurseries()])
@@ -27,11 +28,6 @@ export const RetailerDetails = () => {
     return <p>Loading...</p>;
   }
 
-  const getFlowerDetails = (flowerId) => {
-    const flower = flowers.find(f => f.id === flowerId);
-    return flower ? `${flower.color} ${flower.species}` : '';
-  };
-
   const getDistributorName = (distributorId) => {
     const distributor = distributors.find(d => d.id === distributorId);
     return distributor ? distributor.businessName : '';
@@ -42,22 +38,25 @@ export const RetailerDetails = () => {
     return relevantNurseries.map(n => n.businessName).join(', ');
   };
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this retailer?");
+    if (confirmDelete) {
+      try {
+        await deleteRetailer(retailerId);
+        navigate('/retailers');
+      } catch (error) {
+        alert("Cannot delete retailer: " + error.message);
+      }
+    }
+  };
+
   const distributor = distributors.find(d => d.id === retailer.distributorId);
   const distributorNurseries = nurseries.filter(n => n.distributorId === distributor.id);
-  const retailerFlowers = flowers.filter(f => distributorNurseries.some(n => n.id === f.nurseryId));
 
   return (
     <section className="retailer">
       <h2>{retailer.businessName}</h2>
       <p>{retailer.address}</p>
-      <h3>Flowers Sold:</h3>
-      <ul>
-        {retailerFlowers.map(flower => (
-          <li key={flower.id}>
-            {getFlowerDetails(flower.id)} - Price: ${(flower.price * retailer.flowerMarkup).toFixed(2)}
-          </li>
-        ))}
-      </ul>
       <h3>Distributors:</h3>
       <ul>
         <li>{getDistributorName(retailer.distributorId)}</li>
@@ -68,6 +67,7 @@ export const RetailerDetails = () => {
           <li key={nursery.id}>{nursery.businessName}</li>
         ))}
       </ul>
+      <button onClick={handleDelete}>Delete Retailer</button>
     </section>
   );
 };

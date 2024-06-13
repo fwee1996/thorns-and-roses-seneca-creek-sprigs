@@ -21,6 +21,7 @@ export const App = () => {
         <Route path="/retailers" element={<RetailerList />} />
         <Route path="/retailers/new" element={<RetailerForm />} />
         <Route path="/retailers/:retailerId" element={<RetailerDetails />} />
+        <Route path="/retailers/edit/:retailerId" element={<RetailerDetails />} />
         <Route
           path="*"
           element={

@@ -1,57 +1,74 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createRetailer } from '../../services/retailerService';
+/* eslint-disable react/prop-types */
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Modal } from 'react-bootstrap';
 
-export const RetailerForm = () => {
-  const [businessName, setBusinessName] = useState('');
-  const [address, setAddress] = useState('');
-  const [flowerMarkup, setFlowerMarkup] = useState('');
-  const navigate = useNavigate();
+export const RetailerForm = ({ show, handleClose, handleSave, currentRetailer, mode }) => {
+  const [retailer, setRetailer] = useState({ businessName: '', address: '', flowerMarkup: '' });
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const newRetailer = {
-      businessName,
-      address,
-      flowerMarkup: parseFloat(flowerMarkup)
-    };
+  useEffect(() => {
+    if (currentRetailer) {
+      setRetailer(currentRetailer);
+    } else {
+      setRetailer({ businessName: '', address: '', flowerMarkup: '' });
+    }
+  }, [currentRetailer]);
 
-    const createdRetailer = await createRetailer(newRetailer);
-    navigate(`/retailers/${createdRetailer.id}`);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setRetailer(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = () => {
+    handleSave(retailer);
+    handleClose();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>New Retailer</h2>
-      <div>
-        <label>Business Name:</label>
-        <input
-          type="text"
-          value={businessName}
-          onChange={(e) => setBusinessName(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Address:</label>
-        <input
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-        />
-      </div>
-      <div>
-        <label>Flower Price Markup:</label>
-        <input
-          type="number"
-          step="0.01"
-          value={flowerMarkup}
-          onChange={(e) => setFlowerMarkup(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit">Save</button>
-    </form>
+    <Modal show={show} onHide={handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>
+          {mode === 'add' ? 'Add Retailer' : 'Modify Retailer'}
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form>
+          <Form.Group>
+            <Form.Label>Business Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="businessName"
+              value={retailer.businessName}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Address</Form.Label>
+            <Form.Control
+              type="text"
+              name="address"
+              value={retailer.address}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Flower Markup</Form.Label>
+            <Form.Control
+              type="text"
+              name="flowerMarkup"
+              value={retailer.flowerMarkup}
+              onChange={handleChange}
+            />
+          </Form.Group>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="primary" onClick={handleSubmit}>
+          {mode === 'add' ? 'Add Retailer' : 'Save Changes'}
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
