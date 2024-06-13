@@ -242,7 +242,7 @@
       "id": 1,
       "businessName": "Flower Shoppe",
       "address": "123 Flower St, Bloomfield",
-      "flowerMarkup": 1.9,
+      "flowerMarkup": "1.9",
       "distributorId": 5
     },
     {
@@ -384,6 +384,12 @@
       "flowerId": 4,
       "orderId": 1,
       "qty": 3
+    },
+    {
+      "id": 2,
+      "flowerId": 1,
+      "orderId": 2,
+      "qty": 5
     },
     {
       "id": 3,
