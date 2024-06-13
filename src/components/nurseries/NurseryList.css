@@ -1,0 +1,59 @@
+/*list of nurseries */
+.nursery {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  /*each nursery card */
+  .nursery-list-item {
+    margin: 10px;
+    border: 1px solid #ffcdf3;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(185, 9, 9, 0.568);
+    color: rgb(2, 121, 12);
+    width: 300px;
+    background-color: #ffe6f2;
+  }
+  
+  .btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin-right:10px
+  }
+  
+  .btn-primary {
+    background-color: #28a745;
+  }
+  
+  .btn-primary:hover {
+    background-color: #218838;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  .btn-group {
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Button inside card */
+  .card-button {
+    margin-top: 10px;
+  }
+  

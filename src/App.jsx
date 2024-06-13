@@ -10,6 +10,9 @@ import { EmployeeNav } from "./components/nav/EmployeeNav.jsx";
 import { RetailerList } from "./components/retailers/RetailerList.jsx";
 import { RetailerDetails } from "./components/retailers/RetailerDetails.jsx";
 import { RetailerForm } from "./components/retailers/RetailerForm.jsx";
+import { NurseryList } from "./components/nurseries/NurseryList.jsx";
+import { AddNursery } from "./components/nurseries/AddNursery.jsx";
+import { EditNursery } from "./components/nurseries/EditNursery.jsx";
 
 export const App = () => {
   return (
@@ -22,6 +25,10 @@ export const App = () => {
         <Route path="/retailers/new" element={<RetailerForm />} />
         <Route path="/retailers/:retailerId" element={<RetailerDetails />} />
         <Route path="/retailers/edit/:retailerId" element={<RetailerDetails />} />
+        <Route path="/nurseries" element={<NurseryList />} />
+        <Route path="/nurseries/addNursery" element={<AddNursery />} />
+        <Route path="/nurseries/editNursery/:id" element={<EditNursery />} />
+
         <Route
           path="*"
           element={
@@ -34,3 +41,7 @@ export const App = () => {
     </>
   );
 };
+
+
+
+
