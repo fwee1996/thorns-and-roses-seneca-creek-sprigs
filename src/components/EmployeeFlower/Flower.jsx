@@ -1,14 +1,12 @@
 /* eslint-disable react/prop-types */
+/* eslint-disable no-unused-vars */
 // src/components/Flowers/Flower.jsx
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
-import { Button, Card } from 'react-bootstrap';
-import './flower.css';
+import React from 'react'
+import { Button, Card } from 'react-bootstrap'
+import './flower.css'
 
 export const Flower = ({ flower, onModify, onDelete }) => {
-    if (!flower) {
-        return null; // Avoid rendering if flower is undefined
-    }
+
 
     return (
         <Card className="flower-card">
@@ -54,8 +52,11 @@ export const Flower = ({ flower, onModify, onDelete }) => {
                 <Button className='delete-flower' variant="danger" onClick={() => onDelete(flower.id)}>Delete</Button>
             </Card.Body>
         </Card>
-    );
-};
+    )
+}
+
+
+
 
 
 

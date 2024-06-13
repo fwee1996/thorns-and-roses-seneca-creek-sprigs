@@ -1,52 +1,52 @@
+/* eslint-disable no-unused-vars */
 // src/components/Flowers/FlowerList.jsx
-// eslint-disable-next-line no-unused-vars
-import React, { useState, useEffect } from 'react';
-import './flower.css';
-import { Flower } from "./Flower.jsx";
-import { getAllFlowers, updateFlower, addFlower, deleteFlower } from "./flowerService.jsx";
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react'
+import Flower from './Flower'
+import './flower.css'
+import { Button } from 'react-bootstrap'
 import { FlowerForm } from "./FlowerForm.jsx";
 
+import { addFlower, deleteFlower, getAllFlowers, updateFlower } from './flowerService.jsx'
 
 export const FlowerList = () => {
-    const [flowers, setFlowers] = useState([]);
-    const [showModal, setShowModal] = useState(false);
-    const [currentFlower, setCurrentFlower] = useState(null);
-    const [mode, setMode] = useState('add'); // Add mode state
+    const [flowers, setFlowers] = useState([])
+    const [showModal, setShowModal] = useState(false)
+    const [currentFlower, setCurrentFlower] = useState(null)
+    const [mode, setMode] = useState('add')
 
     useEffect(() => {
-        fetchFlowers();
+        fetchFlowers()
     }, []);
 
     const fetchFlowers = () => {
         getAllFlowers()
             .then(data => setFlowers(data))
-            .catch(error => console.error("Error fetching flowers:", error));
+            .catch(error => console.error("Error fetching flowers:", error))
     };
 
     const handleAdd = () => {
         setCurrentFlower(null);
-        setMode('add'); // Set mode to add
-        setShowModal(true);
+        setMode('add')
+        setShowModal(true)
     };
 
     const handleModify = (flower) => {
-        setCurrentFlower(flower);
-        setMode('modify'); // Set mode to modify
-        setShowModal(true);
+        setCurrentFlower(flower)
+        setMode('modify')
+        setShowModal(true)
     };
 
     const handleSave = (flower) => {
         if (mode === 'modify') {
-            updateFlower(currentFlower.id, flower).then(fetchFlowers);
+            updateFlower(currentFlower.id, flower).then(fetchFlowers)
         } else {
-            addFlower(flower).then(fetchFlowers);
+            addFlower(flower).then(fetchFlowers)
         }
-    };
+    }
 
     const handleDelete = (id) => {
-        deleteFlower(id).then(fetchFlowers);
-    };
+        deleteFlower(id).then(fetchFlowers)
+    }
 
     return (
         <>
@@ -73,9 +73,6 @@ export const FlowerList = () => {
                 mode={mode} // Pass mode to FlowerModal
             />
         </>
-    );
-};
-
-
-
+    )
+}
 
