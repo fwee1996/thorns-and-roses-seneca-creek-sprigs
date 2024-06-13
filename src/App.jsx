@@ -6,18 +6,18 @@ import { ApplicationViews } from "./views/ApplicationViews.jsx";
 import { Login } from "./components/auth/Login.jsx";
 import { Register } from "./components/auth/Register.jsx";
 import { Authorized } from "./views/Authorized.jsx";
-import { EmployeeNav } from "./components/nav/EmployeeNav.jsx";
 import { RetailerList } from "./components/retailers/RetailerList.jsx";
 import { RetailerDetails } from "./components/retailers/RetailerDetails.jsx";
 import { RetailerForm } from "./components/retailers/RetailerForm.jsx";
 import { NurseryList } from "./components/nurseries/NurseryList.jsx";
 import { AddNursery } from "./components/nurseries/AddNursery.jsx";
 import { EditNursery } from "./components/nurseries/EditNursery.jsx";
+import { LoginNav } from "./components/nav/LoginNav.jsx";
 
 export const App = () => {
   return (
     <>
-      <EmployeeNav />
+      <LoginNav />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

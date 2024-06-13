@@ -1,65 +1,63 @@
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
-import { useNavigate } from "react-router-dom"
-import "./Login.css"
-import { getUserByEmail } from "../../services/userService"
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
+import { getUserByEmail } from "../../services/userService";
+import { Button, Form } from "react-bootstrap";
 
 export const Login = () => {
-  const [email, set] = useState("susan.phillips@example.com")
-  const navigate = useNavigate()
+  const [email, set] = useState("susan.phillips@example.com");
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     getUserByEmail(email).then((foundUsers) => {
       if (foundUsers.length === 1) {
-        const user = foundUsers[0]
+        const user = foundUsers[0];
         localStorage.setItem(
           "sprig_user",
           JSON.stringify({
             id: user.id,
             isStaff: user.isStaff,
           })
-        )
+        );
 
-        navigate("/")
+        navigate("/");
       } else {
-        window.alert("Invalid login")
+        window.alert("Invalid login");
       }
-    })
-  }
+    });
+  };
 
   return (
-    <main className="container-login">
+    <main className="auth-box">
       <section>
-        <form className="form-login" onSubmit={handleLogin}>
-          <h1>Seneca Creek Sprigs</h1>
-          <h2>Please sign in</h2>
-          <fieldset>
-            <div className="form-group">
-              <input
+        <Form onSubmit={handleLogin}>
+          <Form.Group className="mb-2">
+          <h1><span className="title-style">Seneca Creek Sprigs</span></h1>
+          <span className="body-style">Please sign in</span></Form.Group>
+          <Form.Group className="mb-3">
+              <Form.Control
                 type="email"
+                id="email"
                 value={email}
                 onChange={(evt) => set(evt.target.value)}
-                className="form-control"
                 placeholder="Email address"
                 required
                 autoFocus
               />
-            </div>
-          </fieldset>
-          <fieldset>
-            <div className="form-group">
-              <button className="login-btn btn-info" type="submit">
+          </Form.Group>
+          <Form.Group className="mb-3">
+              <Button variant="light" type="submit">
                 Sign in
-              </button>
-            </div>
-          </fieldset>
-        </form>
+              </Button>
+          </Form.Group>
+        </Form>
       </section>
       <section>
-        <Link to="/register">Not a member yet?</Link>
+        <Link className="link" to="/register">Not a member yet?</Link>
       </section>
     </main>
-  )
-}
+  );
+};
