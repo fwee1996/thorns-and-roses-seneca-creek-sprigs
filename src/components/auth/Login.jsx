@@ -34,9 +34,9 @@ export const Login = () => {
     <main className="auth-box">
       <section>
         <Form onSubmit={handleLogin}>
-          <Form.Group className="mb-3">
-          <h1>Seneca Creek Sprigs</h1>
-          <h2>Please sign in</h2></Form.Group>
+          <Form.Group className="mb-2">
+          <h1><span className="title-style">Seneca Creek Sprigs</span></h1>
+          <span className="body-style">Please sign in</span></Form.Group>
           <Form.Group className="mb-3">
               <Form.Control
                 type="email"

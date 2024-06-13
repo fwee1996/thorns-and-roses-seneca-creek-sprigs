@@ -7,7 +7,7 @@ import { Button, Form } from "react-bootstrap";
 export const Register = (props) => {
   const [customer, setCustomer] = useState({
     email: "",
-    fullName: "",
+    name: "",
     isStaff: false,
   });
   let navigate = useNavigate();
@@ -50,14 +50,14 @@ export const Register = (props) => {
   return (
     <main className="auth-box">
       <Form onSubmit={handleRegister}>
-        <Form.Group className="mb-3">
-        <h1>Seneca Creek Sprigs</h1>
-        <h2>Please Register</h2></Form.Group>
+        <Form.Group className="mb-2">
+        <h1><span className="title-style">Seneca Creek Sprigs</span></h1>
+        <span className="body-style">Please Register</span></Form.Group>
         <Form.Group className="mb-3">
           <Form.Control
             onChange={updateCustomer}
             type="text"
-            id="fullName"
+            id="name"
             placeholder="Enter your name"
             required
             autoFocus
