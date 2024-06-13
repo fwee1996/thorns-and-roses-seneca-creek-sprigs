@@ -1,36 +1,40 @@
-
+/* eslint-disable react/prop-types */
+// src/components/Flowers/PurchaseForm.jsx
 import { useEffect, useState } from "react"
 import { Button, Form, Modal } from "react-bootstrap"
 
-export const PurchaseForm = ({ show, handleClose, handleSave, currentflower }) => {
-    const [flower, setFlower] = useState({ qty: ''})
+export const PurchaseForm = ({ show, handleClose, handleSave, currentFlower }) => {
+    const [order, setOrder] = useState({ qty: '', flowerId: null })
 
     useEffect(() => {
-        if (currentflower) {
-            setFlower(currentflower)
-        }  else {
-            setFlower({ qty: '' })
+        if (currentFlower) {
+            setOrder({ qty: '', flowerId: currentFlower.id })
+        } else {
+            setOrder({ qty: '', flowerId: null })
         }
-    }, [currentflower])
+    }, [currentFlower])
+
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setOrder(prevState => ({ ...prevState, [name]: value }))
+    }
 
     const handleSubmit = () => {
-        handleSave(flower)
+        handleSave(order)
         handleClose()
     }
 
     return (
         <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>
-                    {'Purchase Flower'}
-                </Modal.Title>
+                <Modal.Title>Purchase Flower</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
                     <Form.Group>
                         <Form.Label>Qty</Form.Label>
                         <Form.Control
-                            type="text"
+                            type="number"
                             name="qty"
                             value={order.qty}
                             onChange={handleChange}
@@ -43,9 +47,10 @@ export const PurchaseForm = ({ show, handleClose, handleSave, currentflower }) =
                     Close
                 </Button>
                 <Button variant="primary" onClick={handleSubmit}>
-                    {'Purchase Flower'}
+                    Purchase Flower
                 </Button>
             </Modal.Footer>
         </Modal>
-    );
+    )
 }
+

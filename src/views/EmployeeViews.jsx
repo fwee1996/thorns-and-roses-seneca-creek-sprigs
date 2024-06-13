@@ -6,6 +6,9 @@ import { FlowerList } from "../components/EmployeeFlower/FlowerList.jsx";
 import { RetailerList } from "../components/retailers/RetailerList.jsx";
 import { RetailerForm } from "../components/retailers/RetailerForm.jsx";
 import { RetailerDetails } from "../components/retailers/RetailerDetails.jsx";
+import { NurseryList } from "../components/nurseries/NurseryList.jsx"
+import { AddNursery } from "../components/nurseries/AddNursery.jsx";
+import { EditNursery } from "../components/nurseries/EditNursery.jsx";
 
 
 export const EmployeeViews = ({ currentUser }) => {
@@ -33,10 +36,9 @@ export const EmployeeViews = ({ currentUser }) => {
           path="/distributors"
           element={<> TO DO </>}
         />
-        <Route
-          path="/nurseries"
-          element={<> TO DO </>}
-        />
+        <Route path="/nurseries" element={<NurseryList />} />
+        <Route path="/nurseries/addNursery" element={<AddNursery />} />
+        <Route path="/nurseries/editNursery/:id" element={<EditNursery />} />
       </Route>
     </Routes>
   );

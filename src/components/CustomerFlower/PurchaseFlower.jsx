@@ -1,7 +1,7 @@
-import { useState } from "react"
-import { getAllFlowers } from "./flowerService.jsx";
-import { Button } from "bootstrap";
-import { PurchaseForm } from "./PurchaseForm.jsx";
+import { useEffect, useState } from "react"
+import { getAllFlowers } from '../EmployeeFlower/flowerService.jsx'
+import { PurchaseForm } from "./PurchaseForm.jsx"
+import { CustomerFlower } from "./CustomerFlower"
 
 export const PurchaseFlower = () => {
     const [flowers, setFlowers] = useState({})
@@ -9,8 +9,8 @@ export const PurchaseFlower = () => {
     const [currentFlower, setCurrentFlower] = useState(null);
 
     useEffect(() => {
-        fetchFlowers();
-    }, []);
+        fetchFlowers()
+    }, [])
 
     const fetchFlowers = () => {
         getAllFlowers()
@@ -18,39 +18,34 @@ export const PurchaseFlower = () => {
     }
 
     const handleBuyFlower = (flower) => {
+        setCurrentFlower(flower)
         setShowModal(true)
     }
 
     const handleSave = (order) => {
-       
-    };
+        setShowModal(false)
+    }
 
     return (
         <>
             <div className="flower-list">
-                {flowers.length = 0 ? (
+                {flowers.length > 0 ? (
                     flowers.map(flower => (
-                        <Flower
+                        <CustomerFlower
                             key={flower.id}
                             flower={flower}
+                            onBuy={handleBuyFlower}
                         />
                     ))
                 ) : (
                     <p>Loading Flowers...</p>
                 )}
             </div>
-            <Button 
-                className="new-flower" 
-                variant="success" 
-                onClick={handlePurchaseFlower}
-            >   Purchase Flower
-            </Button>
             <PurchaseForm
                 show={showModal}
                 handleClose={() => setShowModal(false)}
                 handleSave={handleSave}
-                currentFlower={currentFlower} // Pass currentFlower correctly
-                mode={mode} // Pass mode to FlowerModal
+                currentFlower={currentFlower}
             />
         </>
     )
