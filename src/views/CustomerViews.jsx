@@ -34,6 +34,10 @@ export const CustomerViews = ({ currentUser }) => {
           path="/nurseries"
           element={<> TO DO </>}
         />
+        <Route
+          path="/shopping-cart"
+          element={<> TO DO </>}
+        />
       </Route>
     </Routes>
   );
