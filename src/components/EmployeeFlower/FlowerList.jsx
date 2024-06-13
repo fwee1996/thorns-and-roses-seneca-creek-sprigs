@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 // src/components/Flowers/FlowerList.jsx
 import React, { useState, useEffect } from 'react'
-import Flower from './Flower'
+import { Flower } from './Flower.jsx'
 import './flower.css'
 import { Button } from 'react-bootstrap'
 import { FlowerForm } from "./FlowerForm.jsx";
