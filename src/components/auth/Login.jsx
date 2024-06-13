@@ -40,6 +40,7 @@ export const Login = () => {
           <Form.Group className="mb-3">
               <Form.Control
                 type="email"
+                id="email"
                 value={email}
                 onChange={(evt) => set(evt.target.value)}
                 placeholder="Email address"

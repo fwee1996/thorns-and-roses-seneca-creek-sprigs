@@ -15,15 +15,8 @@ export const Register = (props) => {
   const registerNewUser = () => {
     createUser(customer).then((createdUser) => {
       if (createdUser.hasOwnProperty("id")) {
-        localStorage.setItem(
-          "sprig_user",
-          JSON.stringify({
-            id: createdUser.id,
-            staff: createdUser.isStaff,
-          })
-        );
-
-        navigate("/");
+        // Redirect to login page after successful registration
+        navigate("/login");
       }
     });
   };
@@ -51,8 +44,9 @@ export const Register = (props) => {
     <main className="auth-box">
       <Form onSubmit={handleRegister}>
         <Form.Group className="mb-2">
-        <h1><span className="title-style">Seneca Creek Sprigs</span></h1>
-        <span className="body-style">Please Register</span></Form.Group>
+          <h1><span className="title-style">Seneca Creek Sprigs</span></h1>
+          <span className="body-style">Please Register</span>
+        </Form.Group>
         <Form.Group className="mb-3">
           <Form.Control
             onChange={updateCustomer}
