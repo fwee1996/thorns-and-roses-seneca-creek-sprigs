@@ -1,12 +1,13 @@
+
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getAllRetailers, deleteRetailer, updateRetailer } from '../../services/retailerService';
+import { Button } from 'react-bootstrap';
+import { getAllRetailers, deleteRetailer, createRetailer, updateRetailer } from '../../services/retailerService';
 import { getAllFlowers } from '../../services/flowerService';
 import { getAllDistributors } from '../../services/distributorService';
 import { getAllNurseries } from '../../services/nurseryService';
 import { getFlowerNurseries } from '../../services/flowerNurseryService';
+import { RetailerForm } from './RetailerForm';
 import './Retailers.css';
-import { RetailerForm } from './RetailerForm.jsx';
 
 export const RetailerList = () => {
   const [retailers, setRetailers] = useState([]);
@@ -17,9 +18,7 @@ export const RetailerList = () => {
   const [distributorNurseries, setDistributorNurseries] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [currentRetailer, setCurrentRetailer] = useState(null);
-  const [mode, setMode] = useState('add'); // Add mode state
-
-  const navigate = useNavigate();
+  const [mode, setMode] = useState('add'); 
 
   useEffect(() => {
     Promise.all([
@@ -30,34 +29,27 @@ export const RetailerList = () => {
       getFlowerNurseries(),
       fetch('http://localhost:8088/distributorNurseries').then(res => res.json())
     ])
-      .then(([retailersData, flowersData, distributorsData, nurseriesData, flowerNurseriesData, distributorNurseriesData]) => {
-        console.log('Retailers:', retailersData);
-        console.log('Flowers:', flowersData);
-        console.log('Distributors:', distributorsData);
-        console.log('Nurseries:', nurseriesData);
-        console.log('Flower Nurseries:', flowerNurseriesData);
-        console.log('Distributor Nurseries:', distributorNurseriesData);
-
-        setRetailers(retailersData);
-        setFlowers(flowersData);
-        setDistributors(distributorsData);
-        setNurseries(nurseriesData);
-        setFlowerNurseries(flowerNurseriesData);
-        setDistributorNurseries(distributorNurseriesData);
-      });
+    .then(([retailersData, flowersData, distributorsData, nurseriesData, flowerNurseriesData, distributorNurseriesData]) => {
+      setRetailers(retailersData);
+      setFlowers(flowersData);
+      setDistributors(distributorsData);
+      setNurseries(nurseriesData);
+      setFlowerNurseries(flowerNurseriesData);
+      setDistributorNurseries(distributorNurseriesData);
+    });
   }, []);
 
   const getDistributorName = (distributorId) => {
-    const distributor = distributors.find(distributor => distributor.id === distributorId);
+    const distributor = distributors.find(d => d.id === distributorId);
     return distributor ? distributor.businessName : '';
   };
 
   const getNurseryNames = (distributorId) => {
     const relevantNurseries = distributorNurseries
-      .filter(distributorNursery => distributorNursery.distributorId === distributorId)
-      .map(distributorNursery => nurseries.find(nursery => nursery.id === distributorNursery.nurseryId))
-      .filter(nursery => nursery !== undefined)
-      .map(nursery => nursery.businessName);
+      .filter(dn => dn.distributorId === distributorId)
+      .map(dn => nurseries.find(n => n.id === dn.nurseryId))
+      .filter(n => n !== undefined)
+      .map(n => n.businessName);
     return relevantNurseries.join(', ');
   };
 
@@ -66,7 +58,7 @@ export const RetailerList = () => {
     if (confirmDelete) {
       try {
         await deleteRetailer(retailer.id);
-        setRetailers(retailers.filter(retailer => retailer.id !== retailer.id));
+        setRetailers(retailers.filter(r => r.id !== retailer.id));
       } catch (error) {
         alert(`Cannot delete retailer ${retailer.businessName}: ${error.message}`);
       }
@@ -79,11 +71,17 @@ export const RetailerList = () => {
     setShowModal(true);
   };
 
+  const handleAdd = () => {
+    setCurrentRetailer(null);
+    setMode('add'); 
+    setShowModal(true);
+  };
+
   const handleSave = (retailer) => {
     if (mode === 'modify') {
       updateRetailer(retailer).then(fetchRetailers);
     } else {
-      // Handle add logic here if needed
+      createRetailer(retailer).then(fetchRetailers);
     }
     setShowModal(false);
   };
@@ -96,27 +94,21 @@ export const RetailerList = () => {
 
   const getRetailerFlowers = (retailer) => {
     const distributorNurseryIds = distributorNurseries
-      .filter(distributorNursery => distributorNursery.distributorId === retailer.distributorId)
-      .map(distributorNursery => distributorNursery.nurseryId);
+      .filter(dn => dn.distributorId === retailer.distributorId)
+      .map(dn => dn.nurseryId);
 
-    console.log(`Distributor Nurseries for ${retailer.businessName}:`, distributorNurseryIds);
+    const relevantFlowerNurseries = flowerNurseries.filter(fn => distributorNurseryIds.includes(fn.nurseryId));
 
-    const relevantFlowerNurseries = flowerNurseries.filter(flowerNursery => distributorNurseryIds.includes(flowerNursery.nurseryId));
-
-    console.log(`Relevant Flower Nurseries for ${retailer.businessName}:`, relevantFlowerNurseries);
-
-    const relevantFlowers = relevantFlowerNurseries.map(flowerNursery => {
-      const flower = flowers.find(flower => flower.id === flowerNursery.flowerId);
+    const relevantFlowers = relevantFlowerNurseries.map(fn => {
+      const flower = flowers.find(f => f.id === fn.flowerId);
       if (flower) {
         return {
           ...flower,
-          price: (parseFloat(flowerNursery.price) * retailer.flowerMarkup).toFixed(2)
+          price: (parseFloat(fn.price) * retailer.flowerMarkup).toFixed(2)
         };
       }
       return null;
-    }).filter(flower => flower !== null);
-
-    console.log(`Relevant Flowers for ${retailer.businessName}:`, relevantFlowers);
+    }).filter(f => f !== null);
 
     return relevantFlowers;
   };
@@ -126,8 +118,6 @@ export const RetailerList = () => {
       <section className="retailer-list">
         {retailers.map(retailer => {
           const retailerFlowers = getRetailerFlowers(retailer);
-
-          console.log(`Retailer: ${retailer.businessName}`, retailerFlowers);
 
           return (
             <div key={retailer.id} className="retailer-card">
@@ -151,13 +141,13 @@ export const RetailerList = () => {
                   <li key={index}>{name}</li>
                 ))}
               </ul>
-              <button onClick={() => handleModify(retailer)}>Modify</button>
-              <button onClick={() => handleDelete(retailer)}>Delete</button>
+              <Button variant="warning" onClick={() => handleModify(retailer)}>Modify</Button>
+              <Button variant="danger" onClick={() => handleDelete(retailer)}>Delete</Button>
             </div>
           );
         })}
       </section>
-      <button className="new-retailer" onClick={() => navigate('/retailers/new')}>Add New Retailer</button>
+      <Button className="new-retailer" variant="success" onClick={handleAdd}>Add Retailer</Button>
       <RetailerForm
         show={showModal}
         handleClose={() => setShowModal(false)}
