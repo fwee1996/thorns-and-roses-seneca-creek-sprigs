@@ -71,6 +71,18 @@
       "name": "Tony Reggie",
       "email": "Tony@emailme.com",
       "isStaff": true
+    },
+    {
+      "email": "jess@newforce.cohort",
+      "name": "Jess",
+      "isStaff": true,
+      "id": 13
+    },
+    {
+      "email": "jess@customerview",
+      "name": "Jess",
+      "isStaff": false,
+      "id": 14
     }
   ],
   "customers": [
@@ -235,6 +247,68 @@
       "id": 5,
       "businessName": "Stem Distributors",
       "flowerMarkup": 3.1
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 6
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 7
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 8
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 9
+    },
+    {
+      "id": 10
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 11
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 12
+    },
+    {
+      "id": 13
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 14
+    },
+    {
+      "currentUser": {
+        "id": 3,
+        "isStaff": true
+      },
+      "id": 15
     }
   ],
   "retailers": [
@@ -384,6 +458,12 @@
       "flowerId": 4,
       "orderId": 1,
       "qty": 3
+    },
+    {
+      "id": 2,
+      "flowerId": 1,
+      "orderId": 2,
+      "qty": 5
     },
     {
       "id": 3,
