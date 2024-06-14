@@ -71,18 +71,6 @@
       "name": "Tony Reggie",
       "email": "Tony@emailme.com",
       "isStaff": true
-    },
-    {
-      "email": "jess@newforce.cohort",
-      "name": "Jess",
-      "isStaff": true,
-      "id": 13
-    },
-    {
-      "email": "jess@customerview",
-      "name": "Jess",
-      "isStaff": false,
-      "id": 14
     }
   ],
   "customers": [
@@ -254,7 +242,7 @@
       "id": 1,
       "businessName": "Flower Shoppe",
       "address": "123 Flower St, Bloomfield",
-      "flowerMarkup": "1.9",
+      "flowerMarkup": 1.9,
       "distributorId": 5
     },
     {
