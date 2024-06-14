@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Montez&display=swap');
+
+div.form-check {
+    width: fit-content;
+}
+
+.link {
+    color: #5e548e;
+}
+
+.link:hover {
+    color: #231942;
+}
+
+.auth-box {
+    background-color: #cdb4db;
+    padding: 3rem 8rem 3rem 8rem;
+    border-radius: 25px;
+}
+
+.title-style {
+    padding-top: 1rem;
+      color: white !important;
+      font-family: "Montez", cursive !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+  }
+
+  .body-style {
+    color: white !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+    font-weight: lighter !important;
+    font-size: large !important;
+  }

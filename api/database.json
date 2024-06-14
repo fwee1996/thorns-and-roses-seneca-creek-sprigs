@@ -386,6 +386,12 @@
       "qty": 3
     },
     {
+      "id": 2,
+      "flowerId": 1,
+      "orderId": 2,
+      "qty": 5
+    },
+    {
       "id": 3,
       "flowerId": 2,
       "orderId": 2,

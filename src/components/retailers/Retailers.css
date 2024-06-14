@@ -1,0 +1,39 @@
+.retailer-list {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.retailer-card {
+    margin: 10px;
+    border: 1px solid #ffcdf3;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(185, 9, 9, 0.568);
+    color: rgb(2, 121, 12);
+    width: 300px;
+    background-color: #ffe6f2;
+}
+
+button.new-retailer {
+    background-color: #28a745; 
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    margin: 20px auto;
+    display: block;
+    width: auto; 
+}
+
+button.new-retailer:hover {
+    background-color: #218838; 
+}
+
+button {
+    margin-top: 10px;
+}
