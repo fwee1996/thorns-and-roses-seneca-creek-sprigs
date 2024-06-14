@@ -3,6 +3,7 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { Welcome } from "../components/welcome/Welcome.jsx";
 import { EmployeeNav } from "../components/nav/EmployeeNav.jsx";
 import { FlowerList } from "../components/EmployeeFlower/FlowerList.jsx";
+import { DistributorList } from "../components/Distributors/Distributors.jsx";
 
 
 export const EmployeeViews = ({ currentUser }) => {
@@ -26,13 +27,19 @@ export const EmployeeViews = ({ currentUser }) => {
         element={<> TO DO </>} />
         <Route
           path="/distributors"
-          element={<> TO DO </>}
+          index element={<DistributorList currentUser={currentUser}/>}
         />
         <Route
           path="/nurseries"
           element={<> TO DO </>}
         />
       </Route>
+
+       
+
+
+
+
     </Routes>
   );
 };
