@@ -3,7 +3,9 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { Welcome } from "../components/welcome/Welcome.jsx";
 import { EmployeeNav } from "../components/nav/EmployeeNav.jsx";
 import { FlowerList } from "../components/EmployeeFlower/FlowerList.jsx";
+
 import { DistributorList } from "../components/Distributors/Distributors.jsx";
+
 import { RetailerList } from "../components/retailers/RetailerList.jsx";
 import { RetailerForm } from "../components/retailers/RetailerForm.jsx";
 import { RetailerDetails } from "../components/retailers/RetailerDetails.jsx";
