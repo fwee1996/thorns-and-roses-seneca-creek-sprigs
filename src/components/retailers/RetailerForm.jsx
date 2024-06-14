@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Modal, Form, Button } from 'react-bootstrap';
+import { getRetailerById, createRetailer, updateRetailer } from '../../services/retailerService';
 
 export const RetailerForm = ({ show, handleClose, handleSave, currentRetailer, mode }) => {
   const [retailer, setRetailer] = useState({ businessName: '', address: '', flowerMarkup: '' });
@@ -13,12 +13,13 @@ export const RetailerForm = ({ show, handleClose, handleSave, currentRetailer, m
     }
   }, [currentRetailer]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setRetailer(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     handleSave(retailer);
     handleClose();
   };
@@ -26,9 +27,7 @@ export const RetailerForm = ({ show, handleClose, handleSave, currentRetailer, m
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>
-          {mode === 'add' ? 'Add Retailer' : 'Modify Retailer'}
-        </Modal.Title>
+        <Modal.Title>{mode === 'add' ? 'Add Retailer' : 'Modify Retailer'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
